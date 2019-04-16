@@ -1,0 +1,168 @@
+char dataIn = 'S'; // Durma fonksiyonu için karakter 
+
+int pinileri = 2; //** 
+
+int pingeri = 3; //** 
+
+int pinsol = 4; //**ARACIN İLERİ ,GERİ, SAĞ ,SOL KOMUT ÇIKIŞ PİNLERİ** 
+
+int pinsag = 5; //** 
+
+int pinkorna = 8;//korna  
+
+char determinant; //Program döngüsü için karakter 
+
+char det; //Program döngüsü için karakter 
+
+   
+
+void setup() 
+
+{ 
+
+Serial.begin(9600); //HC-06 bluetooth modülü için btu 9600 
+
+pinMode(pinileri, OUTPUT); // Çıkış pinlerini belirliyoruz. 
+
+pinMode(pingeri, OUTPUT); 
+
+pinMode(pinsol, OUTPUT); 
+
+pinMode(pinsag, OUTPUT); 
+
+pinMode(pinkorna, OUTPUT); 
+
+} 
+void loop() 
+
+{ 
+
+det = check(); // determinantı kontrol et 
+
+while (det == 'F') //İLERİ 
+
+{ 
+
+digitalWrite(pinileri, HIGH); 
+
+det = check(); 
+
+} 
+
+while (det == 'B') //GERİ 
+
+{ 
+
+digitalWrite(pingeri, HIGH); 
+
+det = check(); 
+
+} 
+
+   
+
+while (det == 'L') //SOL 
+
+{ 
+
+digitalWrite(pinsol, HIGH); 
+
+det = check(); 
+
+} 
+
+while (det == 'R') //SAĞ 
+
+{ 
+
+digitalWrite(pinsag, HIGH); 
+
+det = check(); 
+
+} 
+
+while (det == 'G') //İLERİ SOL 
+
+{ 
+
+digitalWrite(pinileri, HIGH); 
+
+digitalWrite(pinsol, HIGH); 
+
+det = check(); 
+
+} 
+
+while (det == 'I') //İLERİ SAĞ 
+
+{ 
+
+digitalWrite(pinileri, HIGH); 
+
+digitalWrite(pinsag, HIGH); 
+
+det = check(); 
+
+} 
+
+while (det == 'H') //GERİ SOL 
+
+{ 
+
+digitalWrite(pingeri, HIGH); 
+
+digitalWrite(pinsol, HIGH); 
+
+det = check(); 
+
+} 
+
+while (det == 'J') //GERİ SAĞ 
+
+{ 
+
+digitalWrite(pingeri, HIGH); 
+
+digitalWrite(pinsag, HIGH); 
+
+det = check(); 
+
+} 
+
+while (det == 'V')// KORNA ÇALMA  
+
+{ 
+
+digitalWrite(pinkorna, HIGH); 
+
+delay(100); 
+
+digitalWrite(pinkorna, LOW); 
+
+delay(100); 
+
+det = check(); 
+
+} 
+
+while (det == 'S') //Telefondaki programda atanmış olan durma fonksiyonun harf eşdeğeri 
+
+{ 
+
+digitalWrite(pinileri, LOW); 
+
+digitalWrite(pingeri, LOW); 
+
+digitalWrite(pinsol, LOW); 
+
+digitalWrite(pinsag, LOW); 
+
+digitalWrite(pinkorna, LOW); 
+
+det = check(); 
+
+} 
+
+   
+
+} 
